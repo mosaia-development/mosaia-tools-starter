@@ -1,0 +1,33 @@
+{
+    "name": "TOOL_DISPLAY_NAME",
+    "description": "SHORT_TOOL_DESCRIPTION",
+    "schema": {
+        "type": "function",
+        "function": {
+            "name": "TOOL_DISPLAY_NAME",
+            "description": "LONG_TOOL_DESCRIPTION",
+            "strict": true,
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "EXAMPLE_PARAM_ONE": {
+                        "type": "string",
+                        "description": "EXAMPLE_PARAM_ONE_DESCRIPTION"
+                    },
+                    "EXAMPLE_PARAM_TWO": {
+                        "type": "string",
+                        "description": "EXAMPLE_PARAM_TWO_DESCRIPTION"
+                    }
+                },
+                "required": [
+                    "EXAMPLE_PARAM_ONE",
+                    "EXAMPLE_PARAM_TWO"
+                ],
+                "additionalProperties": false
+            }
+        }
+    },
+    "envVars": [
+        "ENV_VAR_ONE"
+    ]
+}
