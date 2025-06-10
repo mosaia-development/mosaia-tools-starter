@@ -10,20 +10,66 @@
             "parameters": {
                 "type": "object",
                 "properties": {
-                    "EXAMPLE_PARAM_ONE": {
-                        "type": "string",
-                        "description": "EXAMPLE_PARAM_ONE_DESCRIPTION"
-                    },
-                    "EXAMPLE_PARAM_TWO": {
-                        "type": "string",
-                        "description": "EXAMPLE_PARAM_TWO_DESCRIPTION"
+                    "function_args": {
+                        "type": "object",
+                        "description": "The arguments to call one of the supported functions with",
+                        "anyOf": [
+                            {
+                                "type": "object",
+                                "description": "first function",
+                                "properties": {
+                                    "intent": {
+                                        "type": "string",
+                                        "description": "Hard-coded value",
+                                        "enum": [
+                                            "func_1"
+                                        ]
+                                    },
+                                    "func_1_arg_1": {
+                                        "type": "string",
+                                        "description": "first arg."
+                                    },
+                                    "func_1_arg_2": {
+                                        "type": "string",
+                                        "description": "second arg."
+                                    }
+                                },
+                                "additionalProperties": false,
+                                "required": [
+                                    "intent",
+                                    "func_1_arg_1",
+                                    "func_1_arg_2"
+                                ]
+                            },
+                            {
+                                "type": "object",
+                                "description": "second function",
+                                "properties": {
+                                    "intent": {
+                                        "type": "string",
+                                        "description": "Hard-coded value",
+                                        "enum": [
+                                            "func_2"
+                                        ]
+                                    },
+                                    "func_2_arg_1": {
+                                        "type": "string",
+                                        "description": "first arg."
+                                    }
+                                },
+                                "additionalProperties": false,
+                                "required": [
+                                    "intent",
+                                    "func_2_arg_1"
+                                ]
+                            }
+                        ]
                     }
                 },
+                "additionalProperties": false,
                 "required": [
-                    "EXAMPLE_PARAM_ONE",
-                    "EXAMPLE_PARAM_TWO"
-                ],
-                "additionalProperties": false
+                    "function_args"
+                ]
             }
         }
     },
