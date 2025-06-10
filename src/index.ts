@@ -1,27 +1,50 @@
-import toolCall from "./tool-call";
+import toolCall1 from "./tool-call-1";
+import toolCall2 from "./tool-call-2";
 
 type RawEvent = {
     body: string;
 }
 
 type ParsedEvent = {
-    args: Record<string, string>;
+    args: Record<string, any>;
     secrets: Record<string, string>;
+}
+
+type ParsedEventMultipleToolCalls = {
+    args: {
+        function_args: Record<string, string>
+    };
+    secrets: Record<string, string>;
+}
+
+const toolCalls: Record<string, (...args: string[]) => Promise<string>> = {
+    func_1: toolCall1,
+    func_2: toolCall2,
 }
 
 export async function handler(event: RawEvent) {
     const {
         args: {
-            EXAMPLE_PARAM_ONE,
-            EXAMPLE_PARAM_TWO,
+            function_args: {
+                intent,
+                func_1_arg_1,
+                func_1_arg_2,
+                func_2_arg_1,
+            }
         },
         secrets: {
             ENV_VAR_ONE
         }
-    } = JSON.parse(event.body) as ParsedEvent;
+    } = JSON.parse(event.body) as ParsedEventMultipleToolCalls;
 
     try {
-        const result = await toolCall(EXAMPLE_PARAM_ONE, EXAMPLE_PARAM_TWO, ENV_VAR_ONE)
+        let toolCall = toolCalls[intent];
+        let result;
+        if (intent === 'func_1') {
+            result = await toolCall(func_1_arg_1, func_1_arg_2, ENV_VAR_ONE)
+        } else if (intent === 'func_2') {
+            result = await toolCall(func_2_arg_1, ENV_VAR_ONE)
+        }
 
         return {
             statusCode: 200,
