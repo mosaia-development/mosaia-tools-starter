@@ -7,7 +7,7 @@
   "scripts": {
     "build": "tsc",
     "start:dev": "npm run build && node bin/dev.js",
-    "test:request": "curl -XGET \"http://localhost:3000?EXAMPLE_PARAM_ONE=foo&EXAMPLE_PARAM_TWO=bar\""
+    "test:request": "curl -XGET \"http://localhost:3000?EXAMPLE_PARAM_ONE=foo&EXAMPLE_PARAM_TWO=bar\" && echo"
   },
   "devDependencies": {
     "@types/node": "^20.12.11",
